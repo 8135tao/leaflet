@@ -60,14 +60,14 @@ d3.json(url, function(response) {
   function createMap(earthquakes) {
 
     // Define streetmap and darkmap layers
-    var streetmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+    let streetmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
       attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
       maxZoom: 18,
       id: "mapbox.streets",
       accessToken: API_KEY
     });
     
-    var darkmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+    let darkmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
       attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
       maxZoom: 18,
       id: "mapbox.dark",
@@ -75,18 +75,18 @@ d3.json(url, function(response) {
     });
   
     // Define a baseMaps object to hold our base layers
-    var baseMaps = {
+    let baseMaps = {
       "Street Map": streetmap,
       "Dark Map": darkmap
     };
   
     // Create overlay object to hold our overlay layer
-    var overlayMaps = {
+    let overlayMaps = {
       Earthquakes: earthquakes
     };
   
     // Create our map, giving it the streetmap and earthquakes layers to display on load
-    var myMap = L.map("map", {
+    let myMap = L.map("map", {
       center: [
         37.09, -95.71
       ],
@@ -102,16 +102,16 @@ d3.json(url, function(response) {
     }).addTo(myMap);
 
     //create legend, reference:https://stackoverflow.com/questions/21307647/leaflet-adding-a-legend-title
-    var legend = L.control({position: 'bottomright'});
+    let legend = L.control({position: 'bottomright'});
     
     legend.onAdd = function (map) {
-    var div = L.DomUtil.create('div', 'info legend'),
+      let div = L.DomUtil.create('div', 'info legend'),
         magnitute = [0, 1, 2, 3, 4, 5],
         labels = ['<strong> magnitute of</strong>','<strong> earthquake </strong>'],
         from, to;
 
     // loop through our density intervals and generate a label with a colored square for each interval
-        for (var i = 0; i < magnitute.length; i++) {
+        for (let i = 0; i < magnitute.length; i++) {
           from = magnitute[i];
           to = magnitute[i+1];      
           //tenary operator for setting the range of the maginitude, recall tenary operator: '(condition) ? expression on true : expression on false'
