@@ -38,7 +38,7 @@ d3.json(url, function(response) {
   // Run the onEachFeature function once for each piece of data in the array
     var earthquakes = L.geoJSON(earthquakesData, {
       onEachFeature: onEachFeature,
-
+  //pointToLayer property used to add circle marker based on lat and lng of data 
       pointToLayer: function (feature, latlng) {
         //console.log(feature.properties.mag)
 
@@ -56,9 +56,7 @@ d3.json(url, function(response) {
       
     });
 
-
-  // Add our marker cluster layer to the map
-  //myMap.addLayer(markers);
+  //function used to create map and layers
   function createMap(earthquakes) {
 
     // Define streetmap and darkmap layers
@@ -103,7 +101,7 @@ d3.json(url, function(response) {
       collapsed: false
     }).addTo(myMap);
 
-
+    //create legend, reference:https://stackoverflow.com/questions/21307647/leaflet-adding-a-legend-title
     var legend = L.control({position: 'bottomright'});
     
     legend.onAdd = function (map) {
@@ -113,7 +111,6 @@ d3.json(url, function(response) {
         from, to;
 
     // loop through our density intervals and generate a label with a colored square for each interval
-
         for (var i = 0; i < magnitute.length; i++) {
           from = magnitute[i];
           to = magnitute[i+1];      
@@ -125,9 +122,6 @@ d3.json(url, function(response) {
         return div;
     
     };
-
-
-    
 
     legend.addTo(myMap);
 
